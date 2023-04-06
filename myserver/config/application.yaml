@@ -1,0 +1,11 @@
+server:
+  port: 2334
+datasource:
+  driverName: mongodb
+  host: localhost
+  port: 27017
+  database: mxall
+  username: bilin
+  password: 123456
+  charset: utf8
+  loc: Asia/Shanghai
