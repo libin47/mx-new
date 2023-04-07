@@ -3,7 +3,7 @@ package jwttoken
 import (
 	"time"
 
-	"mxapi/model"
+	"myserver/model"
 
 	"github.com/golang-jwt/jwt/v4"
 )
@@ -24,7 +24,7 @@ func ReleaseToken(user *model.User) (string, error) {
 		RegisteredClaims: jwt.RegisteredClaims{
 			ExpiresAt: jwt.NewNumericDate(expirationTime),
 			IssuedAt:  jwt.NewNumericDate(time.Now()),
-			Issuer:    "mxapi",
+			Issuer:    "myserver",
 			Subject:   "user token",
 		},
 	}

@@ -2,10 +2,10 @@ package controller
 
 import (
 	"fmt"
-	"mxapi/database"
-	"mxapi/jwttoken"
-	"mxapi/model"
-	"mxapi/response"
+	"myserver/database"
+	"myserver/jwttoken"
+	"myserver/model"
+	"myserver/response"
 
 	"net/http"
 	"regexp"
@@ -54,33 +54,33 @@ func Register(ctx *gin.Context) {
 	// 数据验证
 	// 用户名长度
 	if len(name) > 18 || len(name) < 3 {
-		response.Response(ctx, http.StatusUnprocessableEntity, 422, nil, "用户名长度应在2-18之间")
+		response.Response(ctx, http.StatusUnprocessableEntity, gin.H{"msg": "用户名长度应在2-18之间"})
 		return
 	}
 	// 密码长度
 	if len(password) < 6 {
-		response.Response(ctx, http.StatusUnprocessableEntity, 422, nil, "密码不能少于6位")
+		response.Response(ctx, http.StatusUnprocessableEntity, gin.H{"msg": "密码不能少于6位"})
 		return
 	}
 	// 邮箱格式
 	if !IsEmail(email) {
-		response.Response(ctx, http.StatusUnprocessableEntity, 422, nil, "邮箱格式错误，请输入正确邮箱")
+		response.Response(ctx, http.StatusUnprocessableEntity, gin.H{"msg": "邮箱格式错误，请输入正确邮箱"})
 		return
 	}
 	// 检测用户名是否存在
 	if IsExistName(ctx, name, DB) {
-		response.Response(ctx, http.StatusUnprocessableEntity, 422, nil, "该用户名已存在，请更换用户名")
+		response.Response(ctx, http.StatusUnprocessableEntity, gin.H{"msg": "该用户名已存在，请更换用户名"})
 		return
 	}
 	// 邮箱是否存在
 	if IsExistEmail(ctx, email, DB) {
-		response.Response(ctx, http.StatusUnprocessableEntity, 422, nil, "该邮箱已注册，请直接登录")
+		response.Response(ctx, http.StatusUnprocessableEntity, gin.H{"msg": "该邮箱已注册，请直接登录"})
 		return
 	}
 	//创建用户
 	hasePassword, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
 	if err != nil {
-		response.Response(ctx, http.StatusUnprocessableEntity, 500, nil, "加密失败")
+		response.Response(ctx, http.StatusUnprocessableEntity, gin.H{"msg": "加密失败"})
 		return
 	}
 	newUser := &model.User{
@@ -90,7 +90,7 @@ func Register(ctx *gin.Context) {
 	}
 	_, err = DB.InsertOne(ctx, newUser)
 	if err != nil {
-		response.Response(ctx, http.StatusUnprocessableEntity, 500, nil, err.Error())
+		response.Response(ctx, http.StatusUnprocessableEntity, gin.H{"msg": err.Error()})
 		return
 	}
 
@@ -98,13 +98,13 @@ func Register(ctx *gin.Context) {
 	//发放token
 	token, err := jwttoken.ReleaseToken(newUser)
 	if err != nil {
-		response.Response(ctx, http.StatusUnprocessableEntity, 500, nil, "系统异常")
+		response.Response(ctx, http.StatusUnprocessableEntity, gin.H{"msg": "系统异常"})
 		fmt.Printf("token generate error: %v", err)
 		return
 	}
 
 	//返回结果
-	response.Success(ctx, gin.H{"token": token}, "注册成功")
+	response.Success(ctx, gin.H{"token": token, "msg": "注册成功"})
 }
 
 func Login(ctx *gin.Context) {
@@ -120,7 +120,7 @@ func Login(ctx *gin.Context) {
 	//数据验证-name是否是用户名或邮箱
 	var user model.User
 	if !IsExistName(ctx, name, DB) && !IsExistEmail(ctx, name, DB) {
-		response.Response(ctx, http.StatusUnprocessableEntity, 400, nil, "用户不存在")
+		response.Response(ctx, http.StatusUnprocessableEntity, gin.H{"msg": "用户不存在"})
 		return
 	}
 	if IsExistName(ctx, name, DB) {
@@ -131,19 +131,19 @@ func Login(ctx *gin.Context) {
 
 	//判断密码是否正确
 	if err := bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(password)); err != nil {
-		response.Response(ctx, http.StatusBadRequest, 400, nil, "密码错误")
+		response.Response(ctx, http.StatusBadRequest, gin.H{"msg": "密码错误"})
 		return
 	}
 
 	//发放token
 	token, err := jwttoken.ReleaseToken(&user)
 	if err != nil {
-		response.Response(ctx, http.StatusUnprocessableEntity, 500, nil, "系统异常")
+		response.Response(ctx, http.StatusUnprocessableEntity, gin.H{"msg": "系统异常"})
 		return
 	}
 
 	//返回结果
-	response.Success(ctx, gin.H{"token": token}, "登录成功")
+	response.Success(ctx, gin.H{"token": token})
 }
 
 type UserDto struct {

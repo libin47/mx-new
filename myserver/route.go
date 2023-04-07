@@ -1,13 +1,19 @@
 package main
 
 import (
-	"mxapi/controller"
-	"mxapi/middleware"
+	"myserver/controller"
+	"myserver/mainroot"
+	"myserver/middleware"
 
 	"github.com/gin-gonic/gin"
 )
 
 func CollectRoute(r *gin.Engine) *gin.Engine {
+	// info
+	r.GET("/", mainroot.CheckExist)
+	r.GET("/info", mainroot.CheckExist)
+	r.GET("/ping", mainroot.PingTest)
+	r.POST("/like_this", mainroot.LikeIt)
 	// r.Use(middleware.CORSMiddleware(), middleware.RecoveryMiddleware())
 	r.POST("/api/auth/register", controller.Register)
 	r.POST("/api/auth/login", controller.Login)

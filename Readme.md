@@ -82,7 +82,7 @@ nvm npm_mirror https://npm.taobao.org/mirrors/npm/
 ```
 ### nodejs
 ```bash
-nvm install 19.5.0
+nvm install 19.5.0 / 16.15(server)
 # pnpm
 npm install pnpm -g
 # pnpm源
@@ -111,11 +111,25 @@ go get
 
 # start-old
 ```bash
-git clone <pre>https://github.com/libin47/mx-server.git
-git clone <pre>https://github.com/libin47/mx-kami.git
-git clone <pre>https://github.com/libin47/mx-admin.git
+git clone https://github.com/libin47/mx-server.git
+git clone https://github.com/libin47/mx-kami.git
+git clone https://github.com/libin47/mx-admin.git
 ```
-在各个目录下```pnpm i```
+在各个目录下
+```bash
+git checkout new
+```
+
+## mx-server
+test:
+node 16.15
+```
+pnpm i
+npm run dev
+```
+
+
+
 # start-new
 
 

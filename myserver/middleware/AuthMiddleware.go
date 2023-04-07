@@ -2,8 +2,8 @@ package middleware
 
 import (
 	"fmt"
-	"mxapi/database"
-	"mxapi/jwttoken"
+	"myserver/database"
+	"myserver/jwttoken"
 	"net/http"
 	"strings"
 
