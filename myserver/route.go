@@ -1,8 +1,9 @@
 package main
 
 import (
-	"myserver/controller"
-	"myserver/mainroot"
+	"myserver/controller/category"
+	"myserver/controller/mainroot"
+	"myserver/controller/user"
 	"myserver/middleware"
 
 	"github.com/gin-gonic/gin"
@@ -13,11 +14,16 @@ func CollectRoute(r *gin.Engine) *gin.Engine {
 	r.GET("/", mainroot.CheckExist)
 	r.GET("/info", mainroot.CheckExist)
 	r.GET("/ping", mainroot.PingTest)
+	r.GET("/like_this", mainroot.GetLikeCount)
 	r.POST("/like_this", mainroot.LikeIt)
+	r.GET("/clean_catch", mainroot.ClearCache)
+	r.GET("/clean_redis", mainroot.ClearRedis)
+	// category
+	r.POST("/categories", category.NewCategory)
 	// r.Use(middleware.CORSMiddleware(), middleware.RecoveryMiddleware())
-	r.POST("/api/auth/register", controller.Register)
-	r.POST("/api/auth/login", controller.Login)
-	r.GET("/api/auth/info", middleware.AuthMiddleware(), controller.Info)
+	r.POST("/api/auth/register", user.Register)
+	r.POST("/api/auth/login", user.Login)
+	r.GET("/api/auth/info", middleware.AuthMiddleware(), user.Info)
 
 	// categoryRoutes := r.Group("/categories")
 	// categoryController := controller.NewCategoryController()

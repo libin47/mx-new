@@ -1,11 +1,11 @@
-package controller
+package user
 
 import (
 	"fmt"
 	"myserver/database"
-	"myserver/jwttoken"
+	"myserver/middleware/jwttoken"
+	"myserver/middleware/response"
 	"myserver/model"
-	"myserver/response"
 
 	"net/http"
 	"regexp"

@@ -49,6 +49,15 @@ look status
 ```bash
 sudo systemctl status mongod  # check status of mongodb
 ```
+create user
+```
+# 创建管理员账户
+use admin
+db.createUser({user:"admin", pwd:"******",roles:[{role:"userAdminAnyDatabase", db:"admin"}]})
+# 创建用户自己的数据库的管理角色
+use mxall
+db.createUser({user:"bilin", pwd:"******",roles:[{role:"dbOwner", db:"mxall"}]})
+```
 ### redis
 ```bash
 sudo apt install -y redis
@@ -87,6 +96,11 @@ nvm install 19.5.0 / 16.15(server)
 npm install pnpm -g
 # pnpm源
 pnpm config set registry https://registry.npm.taobao.org
+```
+
+```bash
+nvm list
+num use xx.xx.xx
 ```
 
 # go
@@ -131,5 +145,14 @@ npm run dev
 
 
 # start-new
+
+
+
+
+
+
+
+
+
 
 

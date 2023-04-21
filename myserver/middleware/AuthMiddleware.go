@@ -3,7 +3,7 @@ package middleware
 import (
 	"fmt"
 	"myserver/database"
-	"myserver/jwttoken"
+	"myserver/middleware/jwttoken"
 	"net/http"
 	"strings"
 

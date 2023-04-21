@@ -11,7 +11,26 @@ import (
 )
 
 var DB *qmgo.Client
-var UserCollection string = "user"
+
+// collection name
+var AlbumsCollection string = "albums"
+var AnalyzesCollection string = "analyzes"
+var CategoriesCollection string = "categories"
+var CommentsCollection string = "comments"
+var LinksCollection string = "links"
+var NotesCollection string = "notes"
+var OptionsCollection string = "options"
+var PagesCollection string = "pages"
+var PhotosCollection string = "photos"
+var PostsCollection string = "posts"
+var ProjectsCollection string = "projects"
+var QasCollection string = "qas"
+var RecentliesCollection string = "recentlies"
+var SaysCollection string = "says"
+var ServerlessstoragesCollection string = "serverlessstorages"
+var SnippetsCollection string = "snippets"
+var TopicsCollection string = "topics"
+var UsersCollection string = "users"
 
 func InitDB(ctx context.Context) *qmgo.Client {
 	cfg := qmgo.Config{
@@ -42,8 +61,109 @@ func GetDB() *qmgo.Database {
 	return db
 }
 
+func GetAlbumsCollection() *qmgo.Collection {
+	db := DB.Database(viper.GetString("datasource.database"))
+	col := db.Collection(AlbumsCollection)
+	return col
+}
+
+func GetAnalyzesCollection() *qmgo.Collection {
+	db := DB.Database(viper.GetString("datasource.database"))
+	col := db.Collection(AnalyzesCollection)
+	return col
+}
+func GetCategoriesCollection() *qmgo.Collection {
+	db := DB.Database(viper.GetString("datasource.database"))
+	col := db.Collection(CategoriesCollection)
+	return col
+}
+
+func GetCommentsCollection() *qmgo.Collection {
+	db := DB.Database(viper.GetString("datasource.database"))
+	col := db.Collection(CommentsCollection)
+	return col
+}
+
+func GetLinksCollection() *qmgo.Collection {
+	db := DB.Database(viper.GetString("datasource.database"))
+	col := db.Collection(LinksCollection)
+	return col
+}
+
+func GetNotesCollection() *qmgo.Collection {
+	db := DB.Database(viper.GetString("datasource.database"))
+	col := db.Collection(NotesCollection)
+	return col
+}
+
+func GetOptionsCollection() *qmgo.Collection {
+	db := DB.Database(viper.GetString("datasource.database"))
+	col := db.Collection(OptionsCollection)
+	return col
+}
+
+func GetPagesCollection() *qmgo.Collection {
+	db := DB.Database(viper.GetString("datasource.database"))
+	col := db.Collection(PagesCollection)
+	return col
+}
+
+func GetPostsCollection() *qmgo.Collection {
+	db := DB.Database(viper.GetString("datasource.database"))
+	col := db.Collection(PostsCollection)
+	return col
+}
+
+func GetPhotosCollection() *qmgo.Collection {
+	db := DB.Database(viper.GetString("datasource.database"))
+	col := db.Collection(PhotosCollection)
+	return col
+}
+
+func GetProjectsCollection() *qmgo.Collection {
+	db := DB.Database(viper.GetString("datasource.database"))
+	col := db.Collection(ProjectsCollection)
+	return col
+}
+
+func GetQasCollection() *qmgo.Collection {
+	db := DB.Database(viper.GetString("datasource.database"))
+	col := db.Collection(QasCollection)
+	return col
+}
+
+func GetRecentliesCollection() *qmgo.Collection {
+	db := DB.Database(viper.GetString("datasource.database"))
+	col := db.Collection(RecentliesCollection)
+	return col
+}
+
+func GetSaysCollection() *qmgo.Collection {
+	db := DB.Database(viper.GetString("datasource.database"))
+	col := db.Collection(SaysCollection)
+	return col
+}
+
+func GetServerlessstoragesCollection() *qmgo.Collection {
+	db := DB.Database(viper.GetString("datasource.database"))
+	col := db.Collection(ServerlessstoragesCollection)
+	return col
+}
+
+func GetSnippetsCollection() *qmgo.Collection {
+	db := DB.Database(viper.GetString("datasource.database"))
+	col := db.Collection(SnippetsCollection)
+	return col
+}
+
+func GetTopicsCollection() *qmgo.Collection {
+	db := DB.Database(viper.GetString("datasource.database"))
+	col := db.Collection(TopicsCollection)
+	return col
+}
+
 func GetUserCollection() *qmgo.Collection {
 	db := DB.Database(viper.GetString("datasource.database"))
-	col := db.Collection(UserCollection)
+	col := db.Collection(UsersCollection)
 	return col
 }

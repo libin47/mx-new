@@ -1,19 +1,17 @@
-TODO: 数据库设置主键
+# auto
+```
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0M2UxMGE3ZWViMTBjOGQzNDliMjdmYiIsImlhdCI6MTY4MTc4OTEwMywiZXhwIjoxNzEzMzQ2NzAzfQ.jdidhexPhYtXt3UXHVPw-STbdBOshIAAdZxrKKzk1lM
+```
 
-权限：
-注册、登录、检查登录
+# mongodb
 
-人物管理：
-增加、删除、修改、审核
+```
+/usr/bin/mongosh
+```
 
-区域管理：
-增加、修改、删除
-
-查询：
-查询人物位置、查询人物历史轨迹、出界报警
-
-
-
+```
+options: like
+```
 
 
 
